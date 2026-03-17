@@ -84,3 +84,94 @@ h1 {
     width: 100px;
     height: 100px;
 }
+
+/* Style search section */
+.search-section {
+  margin-bottom: 30px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap; /* helps responsiveness */
+}
+
+/* Style city input */
+#city-input {
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 2px solid #ddd;
+  flex: 1;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Input focus effect */
+#city-input:focus {
+  border-color: #4facfe;
+}
+
+/* Style search button */
+#search-btn {
+  padding: 12px 30px;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover effect */
+#search-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Style error message */
+.error-message {
+  background: #ffe5e5;          /* light red background */
+  color: #b00020;               /* dark red text */
+  padding: 15px 20px;
+  border-radius: 10px;
+  border-left: 6px solid #ff4d4d; /* thick red border */
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Optional icon style */
+.error-icon {
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+
+/* Spinner */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Spin animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading container */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 30px;
+  text-align: center;
+  color: #555;
+}
