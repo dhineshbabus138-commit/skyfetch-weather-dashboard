@@ -202,3 +202,214 @@ WeatherApp.prototype.showWelcome = function () {
 
 // ✅ Create app
 const app = new WeatherApp('1947240aeb2dc29e5e3567bc5b90dc64');
+
+function WeatherApp(apiKey) {
+    this.apiKey = apiKey;
+
+    this.apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+    this.forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+
+    // Existing DOM
+    this.searchBtn = document.getElementById('search-btn');
+    this.cityInput = document.getElementById('city-input');
+    this.weatherDisplay = document.getElementById('weather-display');
+
+    // ✅ New DOM (Recent Searches)
+    this.recentSearchesSection = document.getElementById('recent-searches-section');
+    this.recentSearchesContainer = document.getElementById('recent-searches-container');
+
+    // ✅ Store recent searches
+    this.recentSearches = [];
+
+    // ✅ Limit (max 5)
+    this.maxRecentSearches = 5;
+
+    this.init();
+}
+
+WeatherApp.prototype.loadRecentSearches = function() {
+    // Get data from localStorage
+    const saved = localStorage.getItem('recentSearches');
+
+    // If exists → convert string to array
+    if (saved) {
+        try {
+            this.recentSearches = JSON.parse(saved);
+        } catch (error) {
+            console.error('Error parsing recent searches:', error);
+            this.recentSearches = [];
+        }
+    }
+
+    // Display on UI
+    this.displayRecentSearches();
+};
+
+WeatherApp.prototype.saveRecentSearch = function(city) {
+
+    // Convert to Title Case (e.g., "chennai" → "Chennai")
+    const cityName = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+
+    // Check if already exists
+    const index = this.recentSearches.indexOf(cityName);
+    if (index > -1) {
+        // Remove existing (to move it to front)
+        this.recentSearches.splice(index, 1);
+    }
+
+    // Add to beginning
+    this.recentSearches.unshift(cityName);
+
+    // Limit to max (5)
+    if (this.recentSearches.length > this.maxRecentSearches) {
+        this.recentSearches.pop();
+    }
+
+    // Save to localStorage
+    localStorage.setItem('recentSearches', JSON.stringify(this.recentSearches));
+
+    // Update UI
+    this.displayRecentSearches();
+};
+
+WeatherApp.prototype.displayRecentSearches = function() {
+
+    // Clear old buttons
+    this.recentSearchesContainer.innerHTML = '';
+
+    // If empty → hide section
+    if (this.recentSearches.length === 0) {
+        this.recentSearchesSection.style.display = 'none';
+        return;
+    }
+
+    // Show section
+    this.recentSearchesSection.style.display = 'block';
+
+    // Create buttons
+    this.recentSearches.forEach(function(city) {
+
+        const btn = document.createElement('button');
+        btn.className = 'recent-search-btn';
+        btn.textContent = city;
+
+        // Click → search again
+        btn.addEventListener('click', function() {
+            this.cityInput.value = city;
+            this.getWeather(city);
+        }.bind(this));
+
+        this.recentSearchesContainer.appendChild(btn);
+
+    }.bind(this));
+};
+
+WeatherApp.prototype.getWeather = async function(city) {
+
+    this.showLoading();
+    this.searchBtn.disabled = true;
+    this.searchBtn.textContent = 'Searching...';
+
+    const currentUrl = `${this.apiUrl}?q=${city}&appid=${this.apiKey}&units=metric`;
+
+    try {
+        const [currentWeather, forecastData] = await Promise.all([
+            axios.get(currentUrl),
+            this.getForecast(city)
+        ]);
+
+        // Show data
+        this.displayWeather(currentWeather.data);
+        this.displayForecast(forecastData);
+
+        // ✅ Save successful search
+        this.saveRecentSearch(city);
+
+        // ✅ Save last searched city
+        localStorage.setItem('lastCity', city);
+
+    } catch (error) {
+        console.error('Error:', error);
+
+        if (error.response && error.response.status === 404) {
+            this.showError('City not found. Please check spelling and try again.');
+        } else {
+            this.showError('Something went wrong. Please try again later.');
+        }
+
+    } finally {
+        this.searchBtn.disabled = false;
+        this.searchBtn.textContent = '🔍 Search';
+    }
+};
+
+WeatherApp.prototype.init = function() {
+
+    // Event listeners
+    this.searchBtn.addEventListener('click', this.handleSearch.bind(this));
+
+    this.cityInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            this.handleSearch();
+        }
+    }.bind(this));
+
+    // ✅ Load recent searches
+    this.loadRecentSearches();
+
+    // ✅ Load last searched city
+    this.loadLastCity();
+
+    // Show welcome (only if no last city)
+    if (!localStorage.getItem('lastCity')) {
+        this.showWelcome();
+    }
+};
+
+WeatherApp.prototype.loadLastCity = function() {
+
+    const lastCity = localStorage.getItem('lastCity');
+
+    if (lastCity) {
+        this.getWeather(lastCity);
+    }
+};
+
+WeatherApp.prototype.loadLastCity = function() {
+    // Get last searched city from localStorage
+    const lastCity = localStorage.getItem('lastCity');
+
+    if (lastCity) {
+        // If found, fetch weather for that city
+        this.getWeather(lastCity);
+    } else {
+        // If no last city, show welcome message
+        this.showWelcome();
+    }
+};
+
+WeatherApp.prototype.showWelcome = function() {
+    const welcomeHTML = `
+        <div class="welcome-message">
+            <h2>🌤️ Welcome to SkyFetch Weather!</h2>
+            <p>Search for a city to get started.</p>
+            <p>Try examples: <em>London, Paris, Tokyo</em></p>
+        </div>
+    `;
+    this.weatherDisplay.innerHTML = welcomeHTML;
+};
+
+WeatherApp.prototype.clearHistory = function() {
+    if (confirm('Clear all recent searches?')) {
+        this.recentSearches = [];
+        localStorage.removeItem('recentSearches');
+        this.displayRecentSearches();
+    }
+};
+
+const clearBtn = document.getElementById('clear-history-btn');
+if (clearBtn) {
+    clearBtn.addEventListener('click', this.clearHistory.bind(this));
+}
+
+this.loadLastCity();
