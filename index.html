@@ -10,6 +10,16 @@
     <div class="container">
         <h1>🌤️ SkyFetch</h1>
         <p class="tagline">Your Personal Weather Dashboard</p>
+
+        <div id="recent-searches-section" class="recent-searches-section">
+    
+    <h3 class="recent-title">Recent Searches</h3>
+
+    <div id="recent-searches-container" class="recent-container">
+        <!-- Buttons will be added here dynamically -->
+    </div>
+
+    </div>
         
         <div class="search-section">
     <input 
@@ -19,10 +29,18 @@
     >
     
     <button id="search-btn">🔍 Search</button>
-</div>
+    </div>
         <div id="weather-display">
             <p class="loading">Loading weather data...</p>
         </div>
+    </div>
+
+    <div id="recent-searches-section" class="recent-searches-section">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h4>Recent Searches</h4>
+        <button id="clear-history-btn" class="clear-history-btn">Clear</button>
+    </div>
+        <div id="recent-searches-container"></div>
     </div>
 
     <!-- Axios CDN -->
