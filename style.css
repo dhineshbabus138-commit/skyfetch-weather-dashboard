@@ -84,3 +84,224 @@ h1 {
     width: 100px;
     height: 100px;
 }
+
+/* Search section */
+.search-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Input box */
+#city-input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+}
+
+/* Button */
+#search-btn {
+    padding: 12px 20px;
+    border: none;
+    background: #667eea;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+/* Hover effect */
+#search-btn:hover {
+    background: #5a67d8;
+}
+
+.forecast-section {
+    margin-top: 30px;
+}
+
+.forecast-title {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.forecast-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.forecast-card {
+    background: #f5f7ff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+}
+
+.forecast-card img {
+    width: 50px;
+}
+
+.forecast-card h4 {
+    margin-bottom: 5px;
+}
+
+/* ===== Forecast Section ===== */
+.forecast-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #eee;
+}
+
+.forecast-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+/* ===== Forecast Grid ===== */
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+
+/* ===== Forecast Card ===== */
+.forecast-card {
+    background: linear-gradient(135deg, #f5f7ff, #e0e7ff);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect 🔥 */
+.forecast-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ===== Card Content ===== */
+
+/* Day name */
+.forecast-card h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Temperature */
+.forecast-card p {
+    font-size: 1.8rem;
+    color: #667eea;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Description */
+.forecast-card small {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: capitalize;
+}
+
+/* Icon */
+.forecast-card img {
+    width: 60px;
+    height: 60px;
+}
+
+
+/* ===== Responsive Design 📱 ===== */
+@media (max-width: 768px) {
+    .forecast-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-card {
+        padding: 15px;
+    }
+
+    .forecast-card p {
+        font-size: 1.4rem;
+    }
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+.welcome-message h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.welcome-message p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Forecast Section */
+.forecast-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #eee;
+}
+
+/* Title */
+.forecast-title {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.forecast-card {
+    background: linear-gradient(135deg, #eef2ff, #dbeafe);
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+}
+
+/* Hover effect 🔥 */
+.forecast-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+
+    .forecast-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-card {
+        padding: 15px;
+    }
+
+    .forecast-temp {
+        font-size: 1.4rem;
+    }
+}
+
+
+.forecast-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
