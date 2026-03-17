@@ -85,93 +85,223 @@ h1 {
     height: 100px;
 }
 
-/* Style search section */
+/* Search section */
 .search-section {
-  margin-bottom: 30px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap; /* helps responsiveness */
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-/* Style city input */
+/* Input box */
 #city-input {
-  padding: 12px 20px;
-  border-radius: 25px;
-  border: 2px solid #ddd;
-  flex: 1;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s ease;
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
 }
 
-/* Input focus effect */
-#city-input:focus {
-  border-color: #4facfe;
-}
-
-/* Style search button */
+/* Button */
 #search-btn {
-  padding: 12px 30px;
-  background: linear-gradient(45deg, #4facfe, #00f2fe);
-  color: white;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+    padding: 12px 20px;
+    border: none;
+    background: #667eea;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
 }
 
 /* Hover effect */
 #search-btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+    background: #5a67d8;
 }
 
-/* Style error message */
-.error-message {
-  background: #ffe5e5;          /* light red background */
-  color: #b00020;               /* dark red text */
-  padding: 15px 20px;
-  border-radius: 10px;
-  border-left: 6px solid #ff4d4d; /* thick red border */
-  text-align: center;
-  font-size: 1rem;
+.forecast-section {
+    margin-top: 30px;
 }
 
-/* Optional icon style */
-.error-icon {
-  font-size: 1.5rem;
-  margin-right: 5px;
+.forecast-title {
+    margin-bottom: 15px;
+    color: #333;
 }
 
-/* Spinner */
-.spinner {
-  width: 50px;
-  height: 50px;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #667eea;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.forecast-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-/* Spin animation */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.forecast-card {
+    background: #f5f7ff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
 }
 
-/* Loading container */
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 30px;
-  text-align: center;
-  color: #555;
+.forecast-card img {
+    width: 50px;
+}
+
+.forecast-card h4 {
+    margin-bottom: 5px;
+}
+
+/* ===== Forecast Section ===== */
+.forecast-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #eee;
+}
+
+.forecast-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+/* ===== Forecast Grid ===== */
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+
+/* ===== Forecast Card ===== */
+.forecast-card {
+    background: linear-gradient(135deg, #f5f7ff, #e0e7ff);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect 🔥 */
+.forecast-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ===== Card Content ===== */
+
+/* Day name */
+.forecast-card h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Temperature */
+.forecast-card p {
+    font-size: 1.8rem;
+    color: #667eea;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* Description */
+.forecast-card small {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: capitalize;
+}
+
+/* Icon */
+.forecast-card img {
+    width: 60px;
+    height: 60px;
+}
+
+
+/* ===== Responsive Design 📱 ===== */
+@media (max-width: 768px) {
+    .forecast-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-card {
+        padding: 15px;
+    }
+
+    .forecast-card p {
+        font-size: 1.4rem;
+    }
+}
+
+.search-section {
+    margin-bottom: 20px;
+}
+
+.welcome-message h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.welcome-message p {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Forecast Section */
+.forecast-section {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #eee;
+}
+
+/* Title */
+.forecast-title {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.forecast-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.forecast-card {
+    background: linear-gradient(135deg, #eef2ff, #dbeafe);
+    padding: 18px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease;
+}
+
+/* Hover effect 🔥 */
+.forecast-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+
+    .forecast-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-card {
+        padding: 15px;
+    }
+
+    .forecast-temp {
+        font-size: 1.4rem;
+    }
+}
+
+
+.forecast-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 }
